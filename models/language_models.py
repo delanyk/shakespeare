@@ -1,7 +1,7 @@
-from corpus import *
+from utils.tokenizer import Tokenizer
 
 
-class LanguageModel:
+class NGramModel:
     """ This is an N-gram Language model that can be
         trained, generate new text, write to a file,
         and test perplexity of texts based on the model.
@@ -149,7 +149,7 @@ class LanguageModel:
 
         with open(filename, 'w') as f:
             for i in range(num):
-                f.write(detokenize(self.generate()))
+                f.write(Tokenizer.detokenize(self.generate()))
                 f.write('\n')
 
     def perplexity(self, string, smoothing=False):
@@ -160,7 +160,7 @@ class LanguageModel:
         from math import log2
 
         # create a padded tokenized string
-        tokens = tokenize(string)
+        tokens = Tokenizer.tokenize(string)
         tokens.insert(0, None)
         tokens.append(None)
 
@@ -232,12 +232,12 @@ class LanguageModel:
 
 
 if __name__ == '__main__':
-    lm = LanguageModel(4)
+    lm = NGramModel(4)
     with open('train_shakespeare.txt', 'r') as f:
         text = f.read()
-    sents = [tokenize(sent) for sent in text.split('\n')]
+    sents = [Tokenizer.tokenize(sent) for sent in text.split('\n')]
     lm.train(sents)
-    print('Generate test:', detokenize(lm.generate()))
+    print('Generate test:', Tokenizer.detokenize(lm.generate()))
     lm.stats()
     try:
         lm.write('test_file.txt', 3)
