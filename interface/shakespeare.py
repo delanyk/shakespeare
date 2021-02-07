@@ -1,11 +1,12 @@
 from utils.tokenizer import Tokenizer
 from models.language_models import NGramModel
 from time import sleep
-
+import os
 
 class ShakespeareSpeak:
     def __init__(self) -> None:
         self.trained = False
+        self.tokenizer = Tokenizer()
 
 
 
@@ -24,13 +25,12 @@ class ShakespeareSpeak:
             sleep(1)
             self.build_model()
 
-    @staticmethod
-    def load_text():
+    def load_text(self):
         try:
             source = input('Please Enter the file name of text for training:\n')
-            with open(source, 'r') as f:
+            with open('data/'+source, 'r') as f:
                 text = f.read()
-            return [Tokenizer.tokenize(seq) for seq in text.split('\n')]
+            return [self.tokenizer.tokenize(seq) for seq in text.split('\n')]
         except:
             print("Invalid file name")
 
@@ -39,7 +39,7 @@ class ShakespeareSpeak:
         try:
             source = input(
                 'Enter the file name of text for perplexity evaluation:\n')
-            with open(source, 'r') as f:
+            with open("./data/"+source, 'r') as f:
                 text = f.read()
             return [sent for sent in text.split('\n') if sent]
         except:
@@ -103,7 +103,7 @@ class ShakespeareSpeak:
 
                 else:
                     lm.train(data)
-                    trained = True
+                    self.trained = True
                     print('\nCompleted.\nModel is trained.')
                     sleep(1)
 

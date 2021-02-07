@@ -1,15 +1,38 @@
-from nltk import work_tokenize
 import re
 
 class Tokenizer:
 
     def __init__(self) -> None:
-        pass
+        # numbers
+        num = r'\b[0-9\.]+\b'
+        # punctuation
+        punct = r'[\u0021-\u002f\u003a-\u0040\u005b-\u0060\u007b-\u007e\u00a1-\u00bf\u00d7\u00f7\u2013-\u204a]'
+        # general words
+        word = r'(?:[a-zA-Z\U0001d5d4-\U0001d607]+)|(?:[a-zA-Z\U0001d5d4-\U0001d607-]+)'
+        # contractions
+        contract = r'n?\'[a-zA-Z]+'
+        # abbriviations
+        abbriv = r'[A-Z]\.[A-Z]\.([A-Z]\.)?'
+        # elipses
+        elipses = r'[\.]{3,}'
 
-    @staticmethod
-    def tokenize(text:str) -> list:
-        tokens = word_tokenize(text.lower())
-        
+
+        # set of tokens
+        token_set = [
+            contract,
+            abbriv, 
+            word,
+            num,
+            elipses,
+            punct
+            ]
+
+        # compile search pattern including spaces
+        self.token_pattern = re.compile(r'\s+|('+r'|'.join(token_set)+r')', re.UNICODE)
+
+    def tokenize(self,text:str) -> list:
+        tokens = [i for i in self.token_pattern.split(text.lower()) if i]
+
         return tokens
 
 
