@@ -1,4 +1,4 @@
-# N-gram Language Model Project
+# Shakespeare Speak: n-gram Language Model Project
 
 This project is a n-gram language model that accepts a loaded text and generate new texts based on the learned texts. Text can be generated on screen or be written to a text. After texts are generated or new texts as desired, their perplexity can be measured against the model. In addition, the model supports the looking under the hood and viewing what the underlying probabilities that form the language generating method.
 
@@ -7,31 +7,9 @@ This project is a n-gram language model that accepts a loaded text and generate 
 
 ## Structure
 
-It is structured into three files: <i>main.py</i>, <i>lm.py</i>, and <i>corpus.py</i>. <i>Main.py</i> contains the head of the program. The <i>lm.py</i> file contains the language model code, and the <i>corpus.py</i> file contains supportive scripts separate from the language model.
-
-```
-main.py
-lm.py
-corpus.py
-```
-
-<br/>
-<br/>
-
-## Prerequisites
-
-The tokenize method used within the program is the NLTK tokenizer. 
-It will need to be installed before it will run properly.
-The remaining libraries come standard in Python 3.6.
-
-<br/>
-<br/>
-
-```bash
-
-pip install nltk
-
-```
+It is structured into three folders: <i>interface</i>, <i>models</i>, and <i>utilities</i>. <i>Interface</i> contains interactive class of the program.  The <i>models</i> folder contains the language model code, and the <i>utils</i> folder contains supportive class separate from the language model.
+The data folder contains text files for training and development.
+the file <i>main.py</i> runs the whole program.
 <br/>
 <br/>
 
