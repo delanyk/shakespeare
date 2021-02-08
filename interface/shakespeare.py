@@ -39,7 +39,7 @@ class ShakespeareSpeak:
         try:
             source = input(
                 'Enter the file name of text for perplexity evaluation:\n')
-            with open("./data/"+source, 'r') as f:
+            with open(source, 'r') as f:
                 text = f.read()
             return [sent for sent in text.split('\n') if sent]
         except:
@@ -52,7 +52,7 @@ class ShakespeareSpeak:
         sleep(2)
 
     def run(self):
-        print("Thank you for choosing\nKing's n-gram Lanaguage Model\n")
+        print("Thank you for choosing\nShakespeare Speak: n-gram Lanaguage Model\n")
         sleep(1)
         ans = input("Would you like to create an n-gram model?: (Y|n)\n")
         if ans == '':

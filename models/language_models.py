@@ -1,4 +1,5 @@
 from utils.tokenizer import Tokenizer
+from math import log2
 
 
 class NGramModel:
@@ -20,6 +21,7 @@ class NGramModel:
         self._tok_types = defaultdict(int)
         self._tok_count = 0
         self._smoothing = False
+        self.tokenizer= Tokenizer()
 
     def ngrams(self, tokens, n):
         """ generates a list of tuples
@@ -157,10 +159,8 @@ class NGramModel:
             Applies Laplace smoothing in all cases
         """
 
-        from math import log2
-
         # create a padded tokenized string
-        tokens = Tokenizer.tokenize(string)
+        tokens = self.tokenizer.tokenize(string)
         tokens.insert(0, None)
         tokens.append(None)
 
@@ -233,9 +233,9 @@ class NGramModel:
 
 if __name__ == '__main__':
     lm = NGramModel(4)
-    with open('train_shakespeare.txt', 'r') as f:
+    with open('../data/train_shakespeare.txt', 'r') as f:
         text = f.read()
-    sents = [Tokenizer.tokenize(sent) for sent in text.split('\n')]
+    sents = [lm.tokenizer.tokenize(sent) for sent in text.split('\n')]
     lm.train(sents)
     print('Generate test:', Tokenizer.detokenize(lm.generate()))
     lm.stats()
