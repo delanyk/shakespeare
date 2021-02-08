@@ -8,7 +8,7 @@ This project is a n-gram language model that accepts a loaded text and generate 
 ## Structure
 
 It is structured into three folders: <i>interface</i>, <i>models</i>, and <i>utilities</i>. <i>Interface</i> contains interactive class of the program.  The <i>models</i> folder contains the language model code, and the <i>utils</i> folder contains supportive class separate from the language model.
-The data folder contains text files for training and development.
+The <i>data</i> folder contains text files for training and development.
 the file <i>main.py</i> runs the whole program.
 <br/>
 <br/>
